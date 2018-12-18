@@ -1,0 +1,5 @@
+ [% FOREACH point IN points %]
+      [new Date([% point.time %]), [% point.value %], [% point.value_other %]],
+ [% END %]
+ 
+ Report generated on [% time %]
