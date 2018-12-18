@@ -19,15 +19,21 @@ our $VERSION = '18.36';
 # Init
 #===============================================================================
 my $l4p_properties = <<EOT;
-log4perl.rootLogger                                = INFO, Screen
+log4perl.rootLogger                                = INFO, Screen, LogFile
 
 log4perl.appender.Screen                           = Log::Log4perl::Appender::Screen
-log4perl.appender.Screen.stderr                    = 0
 log4perl.appender.Screen.layout                    = Log::Log4perl::Layout::PatternLayout
 log4perl.appender.Screen.layout.ConversionPattern  = [%d{ISO8601}] [%5p] %m%n
+
+log4perl.appender.LogFile                           = Log::Log4perl::Appender::File
+log4perl.appender.LogFile.filename                  = ${log_dir}/install_cws_${log_date}.log
+log4perl.appender.LogFile.layout                    = Log::Log4perl::Layout::PatternLayout
+log4perl.appender.LogFile.layout.ConversionPattern  = [%d{ISO8601}] [%5p] %m%n
 EOT
-Log::Log4perl->init(\$l4p_properties) if (not Log::Log4perl->initialized);
-my $logger = Log::Log4perl->get_logger();
+
+Log::Log4perl->init(\$l4p_properties);
+my $logger = Log::Log4perl->get_logger ('Screen');
+$logger = Log::Log4perl->get_logger('LogFile') if ($logfile);
 
 my $opt_version;
 my $opt_help;
