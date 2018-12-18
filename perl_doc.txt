@@ -1,0 +1,244 @@
+BEGINNING PERL SUMMARY
+
+Basics
+Array  : (), ref array [], hash (), ref hash {} 
+Numbers :
+0 octal
+0b binary
+0x hex
+Bcp de delimiter
+Print<<EOF;
+Fdsfsdfsdfsd
+EOF
+Function conversion :
+Hex(‘’), oct(‘’)
+Bitwise Operators for calucls: * , / + -
+**(exp), &, |(or) ,  ^(exclusive or),  ~(not, in number replace 0 with 12 visversa),
+Truth and false:
+==, !=, <, >, <=, >=, < = >(0 equals, -1 right bigger, 1 else), &&, ||, ! (negation)
+String operator:
+. (concat), “string”x3 (affiche plusieurs fois)
+ Operation string et number  perl prend en compte le premier nombre du string et autres 0, chars 0 même début
+Ord (‘’) -> asci value
+Eq, gt, lt, ne : equal greater lesser noth equal, ge le: great or equal, less or equal
+Cmp equivaut à < = >
+Vars:
+//
+$a += 1 … &&=, ||= …
+Global local:
+our $var # global var but not good again
+{ my $var;  #local var called lexical in perl
+} 
+Use strict; # pour être oblige de declarer les variables
+Special var $_ default variable If nothing
+$ normal vars, @ array, % hash
+
+Print “do the $thing” # affiche valeur de thing
+Print ‘do the $thing’ # non comme shell
+Print “the ${times}th” afficher th juste après
+
+$comment = <STDIN>;  # standard input : keyboard
+
+List and hash
+  () #list    on separe element avec q// et , ou espace ou , et ‘’ “” ou saut de ligne ou tab…
+(‘a’, ‘$test’) # result a $test     qq = “”
+Equivaut à: (q/a/, q/$test/) équivaut à : q/a/, q/b/    ou 
+qw(
+1
+2
+) wq <1 2>  …  avec ( ou / { [ |
+List of list …. Not possible directly, ignore les listes intérieures cf : références
+#Element of liste:  
+(‘1’, ‘2’)[-1, 2, 1]    #donne 2 on compte depuis le dernier à partir de 1,  2eme et 1er
+#On peut mixer espace tab et saut de ligne pour séparer.
+($var1, $var2) = ($var2, $var1) ;
+(1.4 .. 6.9)  # affiche 1 to 6
+(‘a’ .. ‘k’) # si on mixe lettre et chiffre, lettre devient donc 0
+Reverse(4 .. 1) ; reverse (qw(‘3’, ‘2’, ‘3’))
+Reverse(‘n’ .. ‘z’)   , pour inverser il faut utiliser reverse spécialy for numbers
+
+Array 
+@days = qw(Monday Tuesday)
+$days = 31 ; # not the same
+$days = @days; # nombre elements
+Print @array;  # affiche sans espace
+Print “@array” ; # affiche avec espace entre chaque
+Print scalar @array ;
+Could use array as list but not good
+
+Print scalar @array; # nbre of elems
+$a = $array[0];  # $$$$$ for 1 element of array!!!!!!!!!!
+Print @array[3, 5, 7 .. 9];
+Swap as list :
+@months[3, 4] = @months[4, 3];
+Ou encore: 
+($months[3], $months[4]) = ($months[4], $months[3])
+
+For (@array) {
+	Print;   # $_
+}
+$#array    last index
+Array function
+Reverse()  same as list
+Push @array, $elem, $elem2;
+Pop @array;
+Shit unshift  pareil mais pour le premier element, avec shift pour enlever des elems
+Sort compare string value alone
+Sort { $a cmp $b} @unsorted; # string sort
+Sort { $a < = > $b } @unsotred; # number sort
+Hashes
+%who = (
+	First => “first”,
+	Second => “second”
+);
+$who{First}
+My %where = reverse %who # inverse keys and values faire attention keys not same
+Adding values as python
+Delete $who{me}
+Looping :
+For (keys %where){
+Print “$_ lives in $where{$_}”;
+}
+My ($value1, $value2, $value3);
+Chomp removes new line \n
+Loops and if
+If (not exists $value) {
+}
+If (defined $value){} elsif() {} else
+&& = and, ! =not, || = or
+Unless (exists $value){} or die “dqdq”
+For ($choice){
+$_ == 1 && print “your choose one”;
+$_ == 2 && print “you choose two”;
+}
+Foreach (@array){
+Print;
+}
+$total += $_ for @ARGV; # argv argument 1er lancement programme
+While (<STDIN>) {}
+Do {} while ();
+Print “fdfdsqf” while ();
+Until opposite of while 
+Last; équivaut à break
+Next; like continue
+Redo;
+OUTER: while … #label
+Last OUTER if $check
+Goto outer ..etc # goto jamais
+
+Regular expression
+
+If ($_ =~ /people/)   équivaut à if (/people/)  # contient
+!~
+/fdsfds/i # insensitive 
+Things to escape: 
+.*?+[](){}^$|\
+/\Q$pattern\E/) # Q escape 14 special chars after, to the end or to the E
+$ end of the string, ^beginning of the string
+While (<>)
+ {
+Print if /$syllable$/;   # open file <> in command args, putting it in $_, $ see in last string of each line by line
+}   # ici le chomp est implicite avec regex
+w[aze]qsdqd   # w followed by (a or z or e) then by qsdqd
+
+\d   equivaut à [0-9] Digits
+\w -> [0-9A-Za-z_] A word variable name letters
+\s -> [\t\n\r]    whitespace
+Majuscule pour inverser :
+\D [^0-9]  non-digit
+\W [^0-9A-Za-z]
+\S [^ \t\n\r]
+\s\w\w\w\s  -> word of 3 letters in middle of 2 spaces
+Maybe a word not in middle of space, (ex special chars) so :
+\b\w\b
+r..h  -> any 2  chars between r and h
+[[:alpha:]]   alphabetic char
+Alnum , digit, lower, upper, punct
+Yes|no -> yes or no,    ye(s|t) -> yes or yet
+? -> 0 or 1, + 1 or more, * 0 or more
+\s{2,3}  2 or 3 spaces, \w{2} exactly 2 words, \w{2,} 2 or more words, 
+[abc] , a or b or c, [^zbc] any other then z or b or c, (abc) the word abc,  
+Backreferences:
+If match multiple, store in $1 $2 …
+
+[a-z]+  match a word and stop
+\w+  match a letter and stop
+([a-z]+)(.*)([a-z]+)  match a word then the rest, but let a letter to match the last regex, result :
+‘silly’ ‘fdqsdqsdq’ ‘I’
+(.*?)   ? for 0 or 1 match
+
+
+Resume matching regex: start, grabs, finish as soon as it can, taking the first decision available even if the second match longer
+
+
+Substitution 
+s/foes/flee/g;
+modifiers:
+/m the match maybe in multiple line
+/x allow use of whitespace and comments in a match
+/s treat the string as 1 line (to practice)
+
+Split : change delimiter :  split /:/, $azer
+My $word = Join “#”, @array;
+
+Inline comments : /ffsdfsd (?# comment) sqdsqdq/ 
+	Using /x for more longer and complexe
+Inline modifiers, we can use the modifiers before the word to match (?i)
+Files and data
+Open FILE, “dir/file” or die $!; #  dernier last error message
+Pirnt $_While (<FILE>)
+< > équivaut à <ARGV>
+@array = <FILE>  read all the file in the array
+$/  line separator default \n we can edit it to separate by paragraph…etc
+$/ = undef;  all file in a string
+$/ = “”  paragraphs
+Open OUT, “> filename” or die $!;
+                     >> for append
+Print out “qsdq”;
+Print out <IN>;  long file ok, but small $/ = undef faster
+*OUT = *STDOUT  mets dans le stdout
+
+Pour lire binaire, binmode FILEHANDLE ;
+By default filehandler is STDOUT,   change default : select FILEHANDLER ;
+Open dqs, “command |” or dir “dqd”;
+Buffer : $| = 1 to write instant, 0 default
+*flux1 = *flux2
+File tests
+If (-e file)
+-e file exists, -f plain file, -d directory, -z zero size, -s non zero size return size bytes, -r readable, -w writable, -x executable, -o owned.
+@files = glob(“*”) -> match all files in current dir
+Directories tests
+Same tests, directory handler opendir unstead of open.
+While (readdir(DR))
+References
+My $var_r = \$var
+My $ref = \$array, \$hash
+My @refs = \ ($a, $b, $c) = (\$,\$,\$) so a list of ref to each elems of the list
+My @english = qw(jan feb ..)
+My @french = qw(janvier fev ..)
+My %months = (English => \@english, French => \@french)
+My @array3 = (1, 2, \@array2 )
+We can reference without declaring a variable :
+My $array_r = [1,2,4,5]
+
+My $hash_r = { apple = > “pomme”, pear => “poire”}
+My %months = (
+	English = > [“January”,”February”,”march”],
+	French => [“janvier”,”fevrier”,”mars”]
+);
+
+
+Reference inside reference
+My @array = (100, 200,
+		[ 2, 4,[1, 2
+My @array = @{$array_r}
+${$ref}[$_]
+Can use -> unstead of {}  $ref-> [0]                     
+Subroutine
+Perl we say function for builtin function
+Subroutine for written function.
+The last line is the output if no return, 
+@ARGV shift
+$_ for @_  ($ in lidy of sub arguments)
+
+Caching system: 
