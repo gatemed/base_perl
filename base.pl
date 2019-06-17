@@ -130,6 +130,6 @@ v18.36
 
 =head1 AUTHORS
 
-IRA NewPDM (MKA)
+MKA
 
 =cut
